@@ -1,1 +1,1 @@
-# userblog-graphql-spring
+# using blogs on graphql - spring infra
