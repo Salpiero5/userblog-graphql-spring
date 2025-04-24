@@ -1,0 +1,30 @@
+type Query {
+  userById(id: ID): User
+  users: [User!]!
+  blogs: [Blog]
+  blogById(id: ID): Blog
+  blogByUserId(id: ID): [Blog]
+  blogByFilter(filter: BlogFilter): [Blog]
+}
+
+type User {
+  id: ID!
+  firstName: String!
+  email: String
+  yearOfBirth: Int
+  blog: [Blog]
+}
+
+type Blog {
+  id: ID!
+  title: String!
+  content: String!
+  published: Boolean!
+  userId: ID!
+  user: User
+}
+
+input BlogFilter {
+  title: String
+  published: Boolean
+}
