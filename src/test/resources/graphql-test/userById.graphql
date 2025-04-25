@@ -1,0 +1,9 @@
+# Not in use
+query {
+    userById(id: "1") {
+        id
+        firstName
+        email
+        yearOfBirth
+    }
+}
