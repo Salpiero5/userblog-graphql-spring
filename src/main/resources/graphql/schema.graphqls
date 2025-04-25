@@ -6,6 +6,9 @@ type Query {
   blogById(id: ID): Blog
   blogsByUserId(id: ID): [Blog]
 
+  # query to see if it's either a blog or a comment
+  articleChecker(articleType: String!): [article]
+
   # filter based on either published or content
   blogsByFilter(filter: BlogFilter): [Blog]
   comments: [Comment!]!
@@ -30,24 +33,33 @@ input CreateUserInput {
   yearOfBirth: Int
 }
 
-type Blog {
-  id: ID!
-  title: String!
-  content: String!
-  published: Boolean!
-  userId: ID!
-  user: User
-  comments: [Comment]
-}
-
 input BlogFilter {
   published: Boolean
   content: String
 }
 
-type Comment {
+type Blog implements Publishable{
+  id: ID!
+  title: String!
+  content: String!
+  userId: ID!
+  user: User
+  comments: [Comment]
+  isPublished: Boolean!
+
+}
+
+type Comment implements Publishable{
   id: ID!
   content: String!
   blog: Blog
   commentator: User
+  isPublished: Boolean!
 }
+
+interface Publishable {
+  isPublished: Boolean!
+}
+
+union article = Comment | Blog
+

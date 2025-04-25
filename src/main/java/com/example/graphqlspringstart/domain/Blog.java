@@ -3,7 +3,7 @@ package com.example.graphqlspringstart.domain;
 import java.util.Arrays;
 import java.util.List;
 
-public record Blog(String id, String title, String content, Boolean published, String userId) {
+public record Blog(String id, String title, String content, Boolean isPublished, String userId) implements Article {
 
     public static List<Blog> BLOGS = Arrays.asList(
             new Blog("1", "Joshua", "Bloch", true, "1"),

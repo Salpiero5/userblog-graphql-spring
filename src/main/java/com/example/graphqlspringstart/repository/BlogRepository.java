@@ -36,7 +36,7 @@ public class BlogRepository {
 
         if (filter.published() != null) {
             return BLOGS.stream()
-                    .filter(blog -> blog.published().equals(filter.published()))
+                    .filter(blog -> blog.isPublished().equals(filter.published()))
                     .toList();
         }
 

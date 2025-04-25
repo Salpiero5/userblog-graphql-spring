@@ -1,10 +1,7 @@
 package com.example.graphqlspringstart.controller;
 
 
-import com.example.graphqlspringstart.domain.Blog;
-import com.example.graphqlspringstart.domain.BlogFilter;
-import com.example.graphqlspringstart.domain.Comment;
-import com.example.graphqlspringstart.domain.User;
+import com.example.graphqlspringstart.domain.*;
 import com.example.graphqlspringstart.repository.BlogRepository;
 import com.example.graphqlspringstart.repository.CommentRepository;
 import com.example.graphqlspringstart.repository.UserRepository;
@@ -68,44 +65,59 @@ public class QueryController {
         return commentRepository.getComments();
     }
 
+    @QueryMapping
+    public List<? extends Article> articleChecker(@Argument String articleType) {
+
+        if (articleType == null) {
+            return List.of();
+        }
+
+        if (articleType.equals("blog")) {
+            return blogRepository.getBlogs();
+        }
+
+        if (articleType.equals("comment")) {
+            return commentRepository.getComments();
+        }
+        return List.of();
+    }
+
     /**
-     *
      * “Hey, when someone asks for the blog field inside a
-     *  User type, GraphQL uses this method to resolve it.”
+     * User type, GraphQL uses this method to resolve it.”
      * query {
-     *   users {
-     *     firstName
-     *     blog {
-     *       title
-     *       published
-     *     }
-     *   }
+     * users {
+     * firstName
+     * blog {
+     * title
+     * published
      * }
-     *
+     * }
+     * }
+     * <p>
      * Showing the blogs for the user
      */
     @SchemaMapping(typeName = "User", field = "blogs")
-    public List<Blog>getBlogsForUser(User user) {
+    public List<Blog> getBlogsForUser(User user) {
         return blogRepository.getByUserId(user.id());
     }
 
     /**
-     *
      * “Hey, when someone asks for the user field inside a
-     *  Blog type, GraphQL uses this method to resolve it.”
+     * Blog type, GraphQL uses this method to resolve it.”
      * query {
-     *  blogs {
-     *     id
-     *     title
-     *     content
-     *     published
-     *     user {
-     *       id
-     *       firstName
-     *     }
-     *   }
+     * blogs {
+     * id
+     * title
+     * content
+     * published
+     * user {
+     * id
+     * firstName
      * }
-     *
+     * }
+     * }
+     * <p>
      * Showing the user for the blog
      */
     @SchemaMapping(typeName = "Blog", field = "user")
