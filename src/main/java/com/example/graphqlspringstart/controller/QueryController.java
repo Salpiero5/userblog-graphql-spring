@@ -11,17 +11,18 @@ import com.example.graphqlspringstart.repository.UserRepository;
 import org.springframework.graphql.data.method.annotation.Argument;
 import org.springframework.graphql.data.method.annotation.QueryMapping;
 import org.springframework.graphql.data.method.annotation.SchemaMapping;
+import org.springframework.stereotype.Controller;
 
 import java.util.List;
 
-@org.springframework.stereotype.Controller
-public class Controller {
+@Controller
+public class QueryController {
 
     private final UserRepository userRepository;
     private final BlogRepository blogRepository;
     private final CommentRepository commentRepository;
 
-    public Controller(UserRepository userRepository, BlogRepository blogRepository, CommentRepository commentRepository) {
+    public QueryController(UserRepository userRepository, BlogRepository blogRepository, CommentRepository commentRepository) {
         this.userRepository = userRepository;
         this.blogRepository = blogRepository;
         this.commentRepository = commentRepository;
@@ -58,7 +59,7 @@ public class Controller {
     }
 
     @QueryMapping
-    public List<Blog> blogByFilter(@Argument BlogFilter filter) {
+    public List<Blog> blogsByFilter(@Argument BlogFilter filter) {
         return blogRepository.getByFilter(filter);
     }
 

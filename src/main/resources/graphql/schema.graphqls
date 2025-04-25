@@ -5,7 +5,9 @@ type Query {
   blogs: [Blog!]!
   blogById(id: ID): Blog
   blogsByUserId(id: ID): [Blog]
-  blogByFilter(filter: BlogFilter): [Blog]
+
+  # filter based on either published or content
+  blogsByFilter(filter: BlogFilter): [Blog]
   comments: [Comment!]!
 }
 
@@ -29,8 +31,8 @@ type Blog {
 }
 
 input BlogFilter {
-  title: String
   published: Boolean
+  content: String
 }
 
 type Comment {

@@ -2,13 +2,11 @@ package com.example.graphqlspringstart.repository;
 
 import com.example.graphqlspringstart.domain.Blog;
 import com.example.graphqlspringstart.domain.BlogFilter;
-import com.example.graphqlspringstart.domain.User;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 import static com.example.graphqlspringstart.domain.Blog.BLOGS;
-import static com.example.graphqlspringstart.domain.User.USERS;
 
 @Repository
 public class BlogRepository {
@@ -39,6 +37,12 @@ public class BlogRepository {
         if (filter.published() != null) {
             return BLOGS.stream()
                     .filter(blog -> blog.published().equals(filter.published()))
+                    .toList();
+        }
+
+        if (filter.content() != null) {
+            return BLOGS.stream()
+                    .filter(blog -> blog.content().equals(filter.content()))
                     .toList();
         }
         return null;
