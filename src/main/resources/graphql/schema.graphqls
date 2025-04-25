@@ -3,8 +3,9 @@ type Query {
   users: [User!]!
   blogs: [Blog]
   blogById(id: ID): Blog
-  blogByUserId(id: ID): [Blog]
+  blogsByUserId(id: ID): [Blog]
   blogByFilter(filter: BlogFilter): [Blog]
+  comments: [Comment!]!
 }
 
 type User {
@@ -12,7 +13,8 @@ type User {
   firstName: String!
   email: String
   yearOfBirth: Int
-  blog: [Blog]
+  blogs: [Blog]
+  comments: [Comment]
 }
 
 type Blog {
@@ -22,9 +24,17 @@ type Blog {
   published: Boolean!
   userId: ID!
   user: User
+  comments: [Comment]
 }
 
 input BlogFilter {
   title: String
   published: Boolean
+}
+
+type Comment {
+  id: ID!
+  content: String!
+  blog: Blog
+  commentator: User
 }
