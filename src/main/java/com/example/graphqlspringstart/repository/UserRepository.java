@@ -20,4 +20,10 @@ public class UserRepository {
                 .findFirst()
                 .orElse(null);
     }
+
+    public List<User> getByName(String namePart) {
+        return USERS.stream()
+                .filter(user -> user.firstName().contains(namePart))
+                .toList();
+    }
 }

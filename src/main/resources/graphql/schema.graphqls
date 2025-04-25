@@ -1,7 +1,8 @@
 type Query {
   userById(id: ID): User
+  usersByName(namePart: String): [User]
   users: [User!]!
-  blogs: [Blog]
+  blogs: [Blog!]!
   blogById(id: ID): Blog
   blogsByUserId(id: ID): [Blog]
   blogByFilter(filter: BlogFilter): [Blog]

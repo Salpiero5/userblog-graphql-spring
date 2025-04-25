@@ -33,6 +33,11 @@ public class Controller {
     }
 
     @QueryMapping
+    public List<User> usersByName(@Argument String namePart) {
+        return userRepository.getByName(namePart);
+    }
+
+    @QueryMapping
     public List<User> users() {
         return userRepository.getUsers();
     }
