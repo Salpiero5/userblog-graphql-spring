@@ -11,6 +11,10 @@ type Query {
   comments: [Comment!]!
 }
 
+type Mutation {
+  createUser(input: CreateUserInput!): User
+}
+
 type User {
   id: ID!
   firstName: String!
@@ -18,6 +22,12 @@ type User {
   yearOfBirth: Int
   blogs: [Blog]
   comments: [Comment]
+}
+
+input CreateUserInput {
+  firstName: String!
+  email: String
+  yearOfBirth: Int
 }
 
 type Blog {
